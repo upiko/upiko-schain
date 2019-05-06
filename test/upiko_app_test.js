@@ -9,9 +9,16 @@ contract("UpikoApp", accounts => {
   const SCHAIN_ACCT = accounts[0];
   const ETH_ACCT = accounts[1];
   const ETH_ACCT2 = accounts[2];
-   
+  
+  it("...it should create user", async () => {
+    const instance = await UpikoApp.deployed();
+    const tx  = await instance.addUser(testServiceName, ETH_ACCT, {from: SCHAIN_ACCT});
+    const id = await instance.idForEthAddr(ETH_ACCT);
+    const users = await instance.users.call(id);
+    assert.equal(users.name, testServiceName);
+  });
 
-  it("...should create a seviceProvider and then get the name", async () => {
+  /*it("...should create a seviceProvider and then get the name", async () => {
     const instance = await UpikoApp.deployed();
     const tx  = await instance.addProviderName(testServiceName, ETH_ACCT, {from: SCHAIN_ACCT});
     let retval = await instance.getProviderName(ETH_ACCT);
@@ -32,7 +39,7 @@ contract("UpikoApp", accounts => {
     let addressArray = await instance.getAllEthAddresses();
     assert.equal(ETH_ACCT, addressArray[0], "expecting addr" + ETH_ACCT);
     assert.equal(ETH_ACCT2, addressArray[1], "expecting addr" + ETH_ACCT2);
-    });
+    });*/
 
 });
 
