@@ -18,6 +18,14 @@ contract("UpikoApp", accounts => {
     assert.equal(users.name, testServiceName);
   });
 
+  it("...it should return one", async () => {
+    const instance = await UpikoApp.deployed();
+    const count = await instance.numberOfUsers();
+    assert.equal(count, 1);
+  });
+
+  
+
   /*it("...should create a seviceProvider and then get the name", async () => {
     const instance = await UpikoApp.deployed();
     const tx  = await instance.addProviderName(testServiceName, ETH_ACCT, {from: SCHAIN_ACCT});
