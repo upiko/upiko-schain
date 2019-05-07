@@ -24,7 +24,15 @@ contract("UpikoApp", accounts => {
     assert.equal(count, 1);
   });
 
-  
+  it("...it should not allow duplicate", async () => {
+    const instance = await UpikoApp.deployed();
+    let count = await instance.numberOfUsers();
+    assert.equal(count, 1); //need this there already
+    const tx  = await instance.addUser(testServiceName, ETH_ACCT, {from: SCHAIN_ACCT});
+   // count = await instance.numberOfUsers();
+   // assert.equal(count, 1); //should not have been added
+  });
+
 
   /*it("...should create a seviceProvider and then get the name", async () => {
     const instance = await UpikoApp.deployed();

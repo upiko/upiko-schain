@@ -16,7 +16,14 @@ contract UpikoApp {
   event UserAdded(string _name, address _ethAddr, bool _isProvider, address sChainAddr);
 
 
-  function addUser(string _name, address _ethAddr, bool _isProvider) public {
+  modifier onlyOne(address _ethAddr) {
+   // uint id = userToId[_ethAddr];
+  //require(id < 0, "cannot create another user for this address, you can call update");
+    _;
+  }
+
+
+  function addUser(string _name, address _ethAddr, bool _isProvider) public onlyOne(_ethAddr){
     uint id = users.push(User(_name, _ethAddr, _isProvider)) - 1;
     userToId[_ethAddr] = id;
     userCount++;
