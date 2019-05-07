@@ -30,42 +30,4 @@ contract UpikoApp {
   function idForEthAddr(address _ethAddr) public view returns (uint){
     return (userToId[_ethAddr]);
   }
-
-  //function getAllUsers() public view returns(User[]) {
-  //  return (users);
-  //}
-
-  //function userForEthAddr(address _ethAddr) public view returns (User){
-  //  uint id = userToAddress[_ethAddr];
-  //  return users[id];
-  //}
-
-
-
-/*
-
- mapping (address => string) ethAddrToName;   //address is eth network(not sidechain) address
-  address[] ethAddresses;
-  uint addrCounter;
-
-  event userAdded(string name, address addrOnEthNetwork, address addrOnSideChain);
-
-  function addUser(string memory _name, address _addrOnEthNetwork, ) public {
-    ethAddrToProviderName[_addrOnEthNetwork] = _name;
-    ethAddresses.push(_addrOnEthNetwork); 
-    addrCounter++;
-    emit providerAdded(_name, _addrOnEthNetwork, msg.sender);
-  }
-
-  function getProviderName(address _ethAddr) public view returns (string memory) {
-    return ethAddrToName[_ethAddr];
-  }
-
-  function getAllEthAddresses()  public view returns (address[]){
-    return ethAddresses;
-  }
-
-  function getTotalAddrCount() public view returns (uint){
-    return addrCounter;
-  }*/
 }
