@@ -17,8 +17,8 @@ contract UpikoApp {
 
 
   modifier onlyOne(address _ethAddr) {
-   // uint id = userToId[_ethAddr];
-  //require(id < 0, "cannot create another user for this address, you can call update");
+    uint id = userToId[_ethAddr];
+    // require(users[id].ethAddr != _ethAddr, "Ethereum address already in use");
     _;
   }
 

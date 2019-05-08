@@ -2,13 +2,15 @@ const UpikoApp = artifacts.require("./UpikoApp.sol");
 
 const testServiceName = "best windex cleaners";
 const testServiceName2 = "mighty scriptkiddies";
+const testServiceName3 = "mucho donuts";
 
 
 contract("UpikoApp", accounts => {
-
   const SCHAIN_ACCT = accounts[0];
   const ETH_ACCT = accounts[1];
   const ETH_ACCT2 = accounts[2];
+  const ETH_ACCT3 = accounts[3];
+ 
   
   it("...it should create user", async () => {
     const instance = await UpikoApp.deployed();
@@ -41,31 +43,41 @@ contract("UpikoApp", accounts => {
     count = await instance.numberOfUsers();
     assert.equal(count, 2); //should not have been added
   });
+});
 
 
-  /*it("...should create a seviceProvider and then get the name", async () => {
+
+contract("UpikoApp", accounts => {
+  const SCHAIN_ACCT = accounts[0];
+  const ETH_ACCT = accounts[1];
+  const ETH_ACCT2 = accounts[2];
+  const ETH_ACCT3 = accounts[3];
+  const ETH_ACCT4 = accounts[4];
+    
+  it("...it should create and return 3 users", async () => {
     const instance = await UpikoApp.deployed();
-    const tx  = await instance.addProviderName(testServiceName, ETH_ACCT, {from: SCHAIN_ACCT});
-    let retval = await instance.getProviderName(ETH_ACCT);
+    let tx  = await instance.addUser(testServiceName, ETH_ACCT, {from: SCHAIN_ACCT});
+    tx  = await instance.addUser(testServiceName2, ETH_ACCT2, {from: SCHAIN_ACCT});
+    tx  = await instance.addUser(testServiceName3, ETH_ACCT3, {from: SCHAIN_ACCT});
+    let count = await instance.numberOfUsers();
+    assert.equal(count, 3);
+    let id1 = await instance.idForEthAddr(ETH_ACCT);
+    let id2 = await instance.idForEthAddr(ETH_ACCT2);
+    let id3 = await instance.idForEthAddr(ETH_ACCT3);
 
-    assert.equal (tx.logs[0].args.name, testServiceName, "not blockchain tx value expected for test provider created");
-    assert.equal(retval, testServiceName, "created provider name should match")
+    let one = await instance.users.call(id1);
+    assert.equal(one.ethAddr, ETH_ACCT);
+    let two = await instance.users.call(id2);
+    assert.equal(two.ethAddr, ETH_ACCT2);
+    let three = await instance.users.call(id3);
+    assert.equal(three.ethAddr, ETH_ACCT3);
+
+    let id4 = await instance.idForEthAddr(ETH_ACCT4);
+    let invalid = await instance.users.call(id4);
+    assert(invalid.ethAddr !== ETH_ACCT4);
   });
 
-
-  it("...should return back correct counts, and all addresses", async () => {
-    const instance = await UpikoApp.deployed();
-    let total = await instance.getTotalAddrCount();
-    assert.equal(total, 1, "expecting 1 addr to exist");
-    const tx  = await instance.addProviderName(testServiceName2, ETH_ACCT2, {from: SCHAIN_ACCT});
-    total = await instance.getTotalAddrCount();
-    assert.equal(total, 2, "expecting 2 addrs to exist");
-
-    let addressArray = await instance.getAllEthAddresses();
-    assert.equal(ETH_ACCT, addressArray[0], "expecting addr" + ETH_ACCT);
-    assert.equal(ETH_ACCT2, addressArray[1], "expecting addr" + ETH_ACCT2);
-    });*/
-
 });
+
 
 
