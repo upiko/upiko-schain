@@ -28,9 +28,18 @@ contract("UpikoApp", accounts => {
     const instance = await UpikoApp.deployed();
     let count = await instance.numberOfUsers();
     assert.equal(count, 1); //need this there already
-    const tx  = await instance.addUser(testServiceName, ETH_ACCT, {from: SCHAIN_ACCT});
+    //const tx  = await instance.addUser(testServiceName, ETH_ACCT, {from: SCHAIN_ACCT});
    // count = await instance.numberOfUsers();
    // assert.equal(count, 1); //should not have been added
+  });
+
+  it("...it should return a count of two", async () => {
+    const instance = await UpikoApp.deployed();
+    let count = await instance.numberOfUsers();
+    assert.equal(count, 1); //need this there already
+    const tx  = await instance.addUser(testServiceName2, ETH_ACCT2, {from: SCHAIN_ACCT});
+    count = await instance.numberOfUsers();
+    assert.equal(count, 2); //should not have been added
   });
 
 

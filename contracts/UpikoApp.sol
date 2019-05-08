@@ -11,7 +11,7 @@ contract UpikoApp {
 
   User[] public users;
   mapping (address => uint) public userToId;
-  uint userCount;
+
 
   event UserAdded(string _name, address _ethAddr, bool _isProvider, address sChainAddr);
 
@@ -26,12 +26,11 @@ contract UpikoApp {
   function addUser(string _name, address _ethAddr, bool _isProvider) public onlyOne(_ethAddr){
     uint id = users.push(User(_name, _ethAddr, _isProvider)) - 1;
     userToId[_ethAddr] = id;
-    userCount++;
     emit UserAdded(_name, _ethAddr, _isProvider, msg.sender);
   }
 
   function numberOfUsers() public view returns (uint){
-    return userCount;
+    return users.length;
   }
 
   function idForEthAddr(address _ethAddr) public view returns (uint){
