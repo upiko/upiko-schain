@@ -5,7 +5,7 @@ const testServiceName2 = "mighty scriptkiddies";
 const testServiceName3 = "mucho donuts";
 
 
-contract("UpikoApp", accounts => {
+contract("UpikoApp User Test", accounts => {
   const SCHAIN_ACCT = accounts[0];
   const ETH_ACCT = accounts[1];
   const ETH_ACCT2 = accounts[2];
@@ -47,7 +47,7 @@ contract("UpikoApp", accounts => {
 
 
 
-contract("UpikoApp", accounts => {
+contract("UpikoApp More User Tests", accounts => {
   const SCHAIN_ACCT = accounts[0];
   const ETH_ACCT = accounts[1];
   const ETH_ACCT2 = accounts[2];
