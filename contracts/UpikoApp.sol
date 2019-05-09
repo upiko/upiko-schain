@@ -13,7 +13,7 @@ contract UpikoApp {
     string skillName;
   }
 
-  struct Sos {
+  struct SOS {
     string description;
     Skill[] skills;
   }
@@ -22,7 +22,7 @@ contract UpikoApp {
   Skill[] public skillsList;
   User[] public users;
   mapping (address => uint) public userToId;
-  mapping (string => uint) skillNameToIndex;
+  mapping (string => uint) private skillNameToIndex;
   
 
   constructor() public{
@@ -45,6 +45,9 @@ contract UpikoApp {
   }
 
   modifier noRepeats(string _skillName){
+    //uint id = skillNameToIndex[_skillName];
+    //require(compareStrings(skillsList[id].skillName, _skillName), "Skill already exists can not add a duplicate");
+    //require (!compareStrings(s.skillName, _skillName), "That skill already exists, can not add a duplicate");
     _;
   }
 
@@ -76,4 +79,9 @@ contract UpikoApp {
     emit SkillAdded(_skillName);
   }
 
+
+  /* Helpers */
+   function compareStrings (string memory a, string memory b) public pure returns (bool) {
+    return (keccak256(abi.encodePacked((a))) == keccak256(abi.encodePacked((b))) );
+  }
 }
